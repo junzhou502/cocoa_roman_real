@@ -51,7 +51,20 @@ class _cosmolike_prototype_base(DataSetLikelihood):
     self.len_log10k_interp_2D = len(self.log10k_interp_2D)
     # ------------------------------------------------------------------------
     
-    ci.initial_setup()
+    ci.initial_setup(
+      self.adopt_limber_gg,
+      self.adopt_limber_gs,
+      self.adopt_RSD_gg,
+      self.adopt_RSD_gs,
+      self.NCell_interpolation,
+      self.Na_interpolation,)
+    
+    self.log.info(' adopt_limber_gg = %d ', self.adopt_limber_gg)
+    self.log.info(' adopt_limber_gs = %d ', self.adopt_limber_gs)
+    self.log.info(' adopt_RSD_gg = %d ', self.adopt_RSD_gg)
+    self.log.info(' adopt_RSD_gs = %d ', self.adopt_RSD_gs)
+    self.log.info(' NCell_interpolation = %d ', self.NCell_interpolation)
+    self.log.info(' Na_interpolation = %d ', self.Na_interpolation)
     
     ci.init_probes(possible_probes=self.probe)
 
@@ -118,11 +131,11 @@ class _cosmolike_prototype_base(DataSetLikelihood):
         if self.add_baryons_on_dv:
           sim = self.which_bsims_add_on_dv
           self.allsims = ini.relativeFileName('all_sims_hdf5_file')
-          ci.init_baryons_contamination(sim = sim, allsims=allsims)
+          ci.init_baryons_contamination(sim = sim, allsims=self.allsims)
 
     if self.use_baryon_pca:
       baryon_pca_file = ini.relativeFileName('baryon_pca_file')
-      self.npcs = 4
+      self.npcs = 1
       ci.set_baryon_pcs(eigenvectors = np.loadtxt(baryon_pca_file))
       self.log.info('use_baryon_pca = True')
       self.log.info('baryon_pca_file = %s loaded', baryon_pca_file)
@@ -216,23 +229,30 @@ class _cosmolike_prototype_base(DataSetLikelihood):
           'h'    : h,
           'mnu'  : self.provider.get_param("mnu"), 
           'w'    : self.provider.get_param("w"),
-          'wa'   : 0.0
+          'wa'   : self.provider.get_param("wa"),
         }
         kbt, tmp_bt = ee2.get_boost2(params, 
-                                     self.z_interp_2D, 
+                                     self.z_interp_2D[self.z_interp_2D < 10.0], 
                                      self.emulator, 
                                      10**np.linspace(-2.0589,0.973,self.len_log10k_interp_2D))
-        bt = np.array([tmp_bt[i] for i in range(self.len_z_interp_2D)],dtype='float64')  
-        lnbt = interp1d(np.log10(kbt), 
+        bt = np.array(tmp_bt, dtype='float64')
+        tmp = interp1d(np.log10(kbt), 
                         np.log(bt), 
                         axis=1,
                         kind='linear', 
                         fill_value='extrapolate', 
                         assume_sorted=True)(self.log10k_interp_2D-np.log10(h)) #h/Mpc
-        lnbt[:,10**(self.log10k_interp_2D-np.log10(h)) < 8.73e-3] = 0.0
-        lnPNL=(lnPL.reshape(self.len_z_interp_2D, 
-                            self.len_log10k_interp_2D, 
-                            order='F') + lnbt).ravel(order='F')
+        tmp[:,10**(self.log10k_interp_2D-np.log10(h)) < 8.73e-3] = 0.0
+        lnbt = np.zeros((self.len_z_interp_2D, self.len_log10k_interp_2D))
+        lnbt[self.z_interp_2D < 10.0, :] = tmp
+        # Use Halofit first that works on all redshifts
+        lnPNL = self.provider.get_Pk_interpolator(("delta_tot", "delta_tot"),
+          nonlinear=True, extrap_kmax =2.5e2*self.accuracyboost).logP(self.z_interp_2D,
+          np.power(10.0,self.log10k_interp_2D)).flatten(order='F')+np.log(h**3) 
+        # on z < 10.0, replace it with EE2
+        lnPNL = np.where((self.z_interp_2D<10)[:,None], 
+          lnPL.reshape(self.len_z_interp_2D,self.len_log10k_interp_2D,order='F')+lnbt, 
+          lnPNL.reshape(self.len_z_interp_2D,self.len_log10k_interp_2D,order='F')).ravel(order='F')
       elif self.non_linear_emul == 2:
         lnPNL = self.provider.get_Pk_interpolator(("delta_tot", "delta_tot"),
           nonlinear=True, extrap_kmax =2.5e2*self.accuracyboost).logP(self.z_interp_2D,

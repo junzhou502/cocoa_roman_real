@@ -1,28 +1,114 @@
   # implementing lens = source
   roman_DZ_L1:
-    value: 'lambda roman_DZ_S1: roman_DZ_S1'
-    latex: \Delta z_\mathrm{l,Roman}^1
+    prior:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    ref:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    proposal: 0.002
+    latex: \Delta z_\mathrm{l,roman}^1
   roman_DZ_L2:
-    value: 'lambda roman_DZ_S2: roman_DZ_S2'
-    latex: \Delta z_\mathrm{l,Roman}^1
+    prior:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    ref:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    proposal: 0.002
+    latex: \Delta z_\mathrm{l,roman}^2
   roman_DZ_L3:
-    value: 'lambda roman_DZ_S3: roman_DZ_S3'
-    latex: \Delta z_\mathrm{l,Roman}^1
+    prior:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    ref:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    proposal: 0.002
+    latex: \Delta z_\mathrm{l,roman}^3
   roman_DZ_L4:
-    value: 'lambda roman_DZ_S4: roman_DZ_S4'
-    latex: \Delta z_\mathrm{l,Roman}^1
+    prior:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    ref:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    proposal: 0.002
+    latex: \Delta z_\mathrm{l,roman}^4
   roman_DZ_L5:
-    value: 'lambda roman_DZ_S5: roman_DZ_S5'
-    latex: \Delta z_\mathrm{l,Roman}^1
+    prior:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    ref:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    proposal: 0.002
+    latex: \Delta z_\mathrm{l,roman}^5
   roman_DZ_L6:
-    value: 'lambda roman_DZ_S6: roman_DZ_S6'
-    latex: \Delta z_\mathrm{l,Roman}^1
+    prior:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    ref:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    proposal: 0.002
+    latex: \Delta z_\mathrm{l,roman}^6
   roman_DZ_L7:
-    value: 'lambda roman_DZ_S7: roman_DZ_S7'
-    latex: \Delta z_\mathrm{l,Roman}^1
+    prior:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    ref:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    proposal: 0.002
+    latex: \Delta z_\mathrm{l,roman}^7
   roman_DZ_L8:
-    value: 'lambda roman_DZ_S8: roman_DZ_S8'
-    latex: \Delta z_\mathrm{l,Roman}^1
+    prior:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    ref:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    proposal: 0.002
+    latex: \Delta z_\mathrm{l,roman}^8
+  roman_DZ_L9:
+    prior:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    ref:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    proposal: 0.002
+    latex: \Delta z_\mathrm{l,roman}^9
+  roman_DZ_L10:
+    prior:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    ref:
+      dist: norm
+      loc: 0.0
+      scale: 0.002
+    proposal: 0.002
+    latex: \Delta z_\mathrm{l,roman}^{10}
   # ------------------------------------------------------------------------
   # ------------------------------------------------------------------------
   # ------------------------------------------------------------------------
@@ -107,6 +193,26 @@
       scale: 0.1
     proposal: 0.1
     latex: b_\mathrm{1-Roman}^8
+  roman_B1_9:
+    prior:
+      min: 0.4
+      max: 4
+    ref:
+      dist: norm
+      loc: 1.60
+      scale: 0.15
+    proposal: 0.1
+    latex: b_\mathrm{1-Roman}^9
+  roman_B1_10:
+    prior:
+      min: 0.4
+      max: 4
+    ref:
+      dist: norm
+      loc: 1.76
+      scale: 0.1
+    proposal: 0.1
+    latex: b_\mathrm{1-Roman}^{10}
   # ------------------------------------------------------------------------
   # ------------------------------------------------------------------------
   # ------------------------------------------------------------------------
@@ -134,6 +240,12 @@
   roman_B2_8:
     value: 0.0
     latex: b_\mathrm{2-Roman}^8
+  roman_B2_9:
+    value: 0.0
+    latex: b_\mathrm{2-Roman}^9
+  roman_B2_10:
+    value: 0.0
+    latex: b_\mathrm{2-Roman}^{10}
   # ------------------------------------------------------------------------
   # ------------------------------------------------------------------------
   # ------------------------------------------------------------------------
@@ -161,6 +273,12 @@
   roman_BMAG_8:
     value: 0.0
     latex: b_\mathrm{BMAG-Roman}^8
+  roman_BMAG_9:
+    value: 0.0
+    latex: b_\mathrm{BMAG-Roman}^9
+  roman_BMAG_10:
+    value: 0.0
+    latex: b_\mathrm{BMAG-Roman}^{10}
   # ------------------------------------------------------------------------
   # ------------------------------------------------------------------------
   # ------------------------------------------------------------------------
@@ -189,3 +307,9 @@
   roman_PM8:
     value: 0.0
     latex: PM_\mathrm{Roman}^8
+  roman_PM9:
+    value: 0.0
+    latex: PM_\mathrm{Roman}^9
+  roman_PM10:
+    value: 0.0
+    latex: PM_\mathrm{Roman}^{10}

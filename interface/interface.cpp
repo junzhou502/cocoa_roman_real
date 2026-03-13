@@ -120,7 +120,13 @@ PYBIND11_MODULE(cosmolike_roman_real_interface, m)
 
   m.def("initial_setup",
       &cosmolike_interface::initial_setup,
-      "Initialize Cosmolike Variables to their Default Values"
+      "Initialize Cosmolike Variables to their Default Values",
+      py::arg("adopt_limber_gg").none(false).noconvert(),
+      py::arg("adopt_limber_gs").none(false).noconvert(),
+      py::arg("adopt_RSD_gg").none(false).noconvert(),
+      py::arg("adopt_RSD_gs").none(false).noconvert(),
+      py::arg("NCell_interpolation").none(false).noconvert(),
+      py::arg("Na_interpolation").none(false).noconvert()
     );
 
   m.def("init_redshift_distributions_from_files",
@@ -432,7 +438,7 @@ PYBIND11_MODULE(cosmolike_roman_real_interface, m)
       &cosmolike_interface::gs_bins,
       "Get galaxy-galaxy lensing redshift binning"
     );
-
+  
   m.def("xi_pm_tomo",
       &cosmolike_interface::xi_pm_tomo_cpp,
       "Compute cosmic shear (real space) data vector at all tomographic"
