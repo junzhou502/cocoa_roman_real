@@ -1,0 +1,10 @@
+data_file = roman_baseline.modelvector
+cov_file = cov_roman
+mask_file = roman_Y3.mask
+nz_lens_file = lsst_lens_4cosmolike.nz
+nz_source_file = fiducial.nz
+lens_ntomo = 10
+source_ntomo = 8
+n_theta = 20
+theta_min_arcmin = 1.
+theta_max_arcmin = 500.
