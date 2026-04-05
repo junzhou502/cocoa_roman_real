@@ -17,10 +17,10 @@ likelihood:
     ggl_exclude: []
 
     print_datavector: True
-    print_datavector_file: ./projects/roman_real/chains/roman_baseline_evaluate/roman.modelvector
+    print_datavector_file: ./projects/roman_real/chains/roman_baseline_nlgbias_evaluate/roman.modelvector
 
-    implement_bin_average: 1
-    adopt_nolimber_gg: 1
+    adopt_limber_gg: 0
+    adopt_limber_gs: 1
     adopt_RSD_gg: 1
     adopt_RSD_gs: 1
     NCell_interpolation: 300 #base:300
@@ -593,6 +593,108 @@ params:
     latex: b_\mathrm{1-roman}^{10}
   # ------------------------------------------------------------------------
   # ------------------------------------------------------------------------
+  roman_B2_1:
+    prior:
+      min: -3.0
+      max: +3.0
+    ref:
+      dist: norm
+      loc: 0
+      scale: 0.1
+    proposal: 0.1
+    latex: b_\mathrm{2-Roman}^1
+  roman_B2_2:
+    prior:
+      min: -3.0
+      max: +3.0
+    ref:
+      dist: norm
+      loc: 0
+      scale: 0.1
+    proposal: 0.1
+    latex: b_\mathrm{2-Roman}^2
+  roman_B2_3:
+    prior:
+      min: -3.0
+      max: +3.0
+    ref:
+      dist: norm
+      loc: 0
+      scale: 0.1
+    proposal: 0.1
+    latex: b_\mathrm{2-Roman}^3
+  roman_B2_4:
+    prior:
+      min: -3.0
+      max: +3.0
+    ref:
+      dist: norm
+      loc: 0
+      scale: 0.1
+    proposal: 0.1
+    latex: b_\mathrm{2-Roman}^4
+  roman_B2_5:
+    prior:
+      min: -3.0
+      max: +3.0
+    ref:
+      dist: norm
+      loc: 0
+      scale: 0.1
+    proposal: 0.1
+    latex: b_\mathrm{2-Roman}^5
+  roman_B2_6:
+    prior:
+      min: -3.0
+      max: +3.0
+    ref:
+      dist: norm
+      loc: 0
+      scale: 0.1
+    proposal: 0.1
+    latex: b_\mathrm{2-Roman}^6
+  roman_B2_7:
+    prior:
+      min: -3.0
+      max: +3.0
+    ref:
+      dist: norm
+      loc: 0
+      scale: 0.1
+    proposal: 0.1
+    latex: b_\mathrm{2-Roman}^7
+  roman_B2_8:
+    prior:
+      min: -3.0
+      max: +3.0
+    ref:
+      dist: norm
+      loc: 0
+      scale: 0.1
+    proposal: 0.1
+    latex: b_\mathrm{2-Roman}^8
+  roman_B2_9:
+    prior:
+      min: -3.0
+      max: +3.0
+    ref:
+      dist: norm
+      loc: 0
+      scale: 0.1
+    proposal: 0.1
+    latex: b_\mathrm{2-Roman}^9
+  roman_B2_10:
+    prior:
+      min: -3.0
+      max: +3.0
+    ref:
+      dist: norm
+      loc: 0
+      scale: 0.1
+    proposal: 0.1
+    latex: b_\mathrm{2-Roman}^{10}
+  # ------------------------------------------------------------------------
+  # ------------------------------------------------------------------------
   # Point Mass parameters
   roman_PM1:
     value: 0.0
@@ -723,7 +825,18 @@ sampler:
       roman_B1_9: 1.60
       roman_B1_10: 1.67
 
+      roman_B2_1: 0.5
+      roman_B2_2: 0.5
+      roman_B2_3: 0.5
+      roman_B2_4: 0.5
+      roman_B2_5: 0.5
+      roman_B2_6: 0.5
+      roman_B2_7: 0.5
+      roman_B2_8: 0.5
+      roman_B2_9: 0.5
+      roman_B2_10: 0.5
+
       w0pwa: -1.0
       w: -1.0
 
-output: ./projects/roman_real/chains/roman_baseline_evaluate/
+output: ./projects/roman_real/chains/roman_baseline_nlgbias_evaluate/

@@ -52,15 +52,17 @@ class _cosmolike_prototype_base(DataSetLikelihood):
     # ------------------------------------------------------------------------
     
     ci.initial_setup(
-      self.adopt_limber_gg,
-      self.adopt_limber_gs,
+      self.implement_bin_average,
+      self.LMAX_NOLIMBER,
+      self.adopt_nolimber_gg,
       self.adopt_RSD_gg,
       self.adopt_RSD_gs,
       self.NCell_interpolation,
       self.Na_interpolation,)
     
-    self.log.info(' adopt_limber_gg = %d ', self.adopt_limber_gg)
-    self.log.info(' adopt_limber_gs = %d ', self.adopt_limber_gs)
+    self.log.info(' implement_bin_average = %d ', self.implement_bin_average)
+    self.log.info(' LMAX_NOLIMBER = %d ', self.LMAX_NOLIMBER)
+    self.log.info(' adopt_nolimber_gg = %d ', self.adopt_nolimber_gg)
     self.log.info(' adopt_RSD_gg = %d ', self.adopt_RSD_gg)
     self.log.info(' adopt_RSD_gs = %d ', self.adopt_RSD_gs)
     self.log.info(' NCell_interpolation = %d ', self.NCell_interpolation)
